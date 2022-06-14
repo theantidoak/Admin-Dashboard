@@ -102,7 +102,7 @@ header svg {
 aside {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  min-width: 10rem;
   background-color: #047857;
   color: #ecfdf5;
   padding: 0 1rem;
@@ -139,7 +139,7 @@ main {
 section {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: .5rem;
   padding: 1rem;
 }
 
@@ -191,10 +191,12 @@ article img {
 }
 
 #right-column {
-  width: min(21.5%, 200px);
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  flex: 1;
+  padding: 0 1rem;
+  
 }
 
 #upcoming-projects {
@@ -257,7 +259,7 @@ footer > div {
 
 
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 500px) {
   a > span {
     display: none;
   }
