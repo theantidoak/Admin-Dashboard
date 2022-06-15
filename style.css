@@ -40,6 +40,8 @@ header > div:first-child {
   flex: 1;
   display: grid;
   justify-items: start;
+  align-self: start;
+  margin-top: .75rem;
   min-width: 7rem;
 }
 #searchbar {
@@ -88,11 +90,18 @@ label[for='searchbar']::after {
 
 #dark-light-mode {
   min-width: fit-content;
+  align-self: start;
+  margin-top: 1rem;
 }
 
 #sun, #moon {
   height: 1rem;
   width: 1rem;
+}
+
+#bell-a {
+  align-self: start;
+  margin-top: .75rem;
 }
 
 #sun {
@@ -135,6 +144,11 @@ label[for='searchbar']::after {
   font-size: 14px;
 }
 
+#my-projects > a:hover {
+  border-color: #065f46;
+  color: #065f46;
+}
+
 aside {
   display: flex;
   flex-direction: column;
@@ -147,7 +161,10 @@ aside {
 #dashboard {
   display: flex;
   gap: .25rem;
+  /* margin-top: 1rem; */
 }
+
+
 
 aside > ul {
   list-style: none;
@@ -204,13 +221,18 @@ section {
 }
 
 #new-content > * {
-  border: 2px solid #059669;
+  border: 2px double #059669;
   border-radius: 15px;
   box-shadow: 3px 3px 5px #34d399;
   padding: .5rem;
   background-color: #FFE5B4;
   color: black;
   font-size: .75rem;
+}
+
+#new-content > *:hover {
+  border-color: #065f46;
+  color: #065f46;
 }
 
 .articles {
