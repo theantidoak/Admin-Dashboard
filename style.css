@@ -141,6 +141,7 @@ section {
   flex-wrap: wrap;
   gap: .5rem;
   padding: 1rem;
+  align-items: flex-start;
 }
 
 #new-content {
