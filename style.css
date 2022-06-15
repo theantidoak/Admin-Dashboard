@@ -25,7 +25,7 @@ header > div:first-child {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  padding-right: 1rem;
+  padding-right: .5rem;
   height: 3rem;
 }
 
@@ -91,7 +91,7 @@ header svg {
 #my-projects > a {
   align-self: flex-end;
   color: black;
-  margin-right: 1rem;
+  margin-right: .5rem;
   margin-bottom: .5rem;
   padding: .25rem;
   border: 2px solid #064e3b;
@@ -145,10 +145,9 @@ section {
 
 #new-content {
   width: 75%;
-  padding: 0 1rem;
   display: flex;
   gap: 1rem;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 #new-content > * {
@@ -161,10 +160,20 @@ section {
 }
 
 .articles {
-  width: max(250px, 75%);
+  flex-basis: 40%;
+  flex-grow: 1.75;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+#right-column {
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
+  flex: 1 1 0;
   padding: 0 1rem;
 }
 
@@ -174,10 +183,12 @@ section {
   padding: 0 1rem;
   border-radius: 15px;
   box-shadow: 5px 5px 10px #16a34a;
+  max-height: auto;
 }
 
+
 article img {
-  width: 95%;
+  width: 100%;
   height: auto;
   justify-self: center;
 }
@@ -188,15 +199,6 @@ article img {
 
 .view-content > * {
   padding-right: 1rem;
-}
-
-#right-column {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  flex: 1;
-  padding: 0 1rem;
-  
 }
 
 #upcoming-projects {
@@ -259,7 +261,7 @@ footer > div {
 
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   a > span {
     display: none;
   }
