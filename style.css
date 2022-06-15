@@ -155,13 +155,12 @@ aside {
   min-width: 11rem;
   background-color: #065f46;
   color: #ecfdf5;
-  padding: 0 1rem;
+  padding: 0 1rem 0 .5rem;
 }
 
 #dashboard {
   display: flex;
-  gap: .25rem;
-  /* margin-top: 1rem; */
+  gap: .75rem;
 }
 
 
