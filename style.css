@@ -31,7 +31,7 @@ header > div:first-child {
   align-items: center;
   gap: 1rem;
   padding-right: .5rem;
-  height: 3rem;
+  height: 5rem;
 }
 
 .form {
@@ -40,14 +40,14 @@ header > div:first-child {
   flex: 1;
   display: grid;
   justify-items: start;
-  margin-right: 1rem;
+  min-width: 7rem;
 }
 #searchbar {
   padding: .5rem;
   display: none;
   border: none;
   border-radius: 15px;
-  outline: 2px solid blue;
+  outline: 2px solid rgb(255, 213, 134);
   width: 1px;
   transition: all .075s ease;
   grid-column: 1/2;
@@ -75,15 +75,19 @@ label[for='searchbar'] {
   min-width: 5%;
   display: flex;
   align-items: center;
-  outline: 1px solid rgba(0, 0, 0, .5);
+  outline: 1px solid rgba(255, 213, 134, .5);
   border-radius: 15px;
   height: 2rem;
 }
 
 label[for='searchbar']::after {
   content: "Search...";
-  color: rgba(0, 0, 0, .5);
+  color: rgba(255, 213, 134, .8);
   padding: .5rem;
+}
+
+#dark-light-mode {
+  min-width: fit-content;
 }
 
 #sun, #moon {
@@ -99,16 +103,25 @@ label[for='searchbar']::after {
 }
 
 #profile-pic {
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 2px solid blue;
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid #FFD586;
   border-radius: 50%;
+  background-image: url(photos/Pirate1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #my-projects {
   display: flex;
   justify-content: space-between;
   color: #FFE5B4;
+}
+
+#my-projects h1 {
+  text-shadow: 1px 1px .5px #FFD586;
+  margin-top: .25rem;
 }
 
 #my-projects > a {
@@ -143,6 +156,16 @@ aside > ul {
 
 li {
   margin-bottom: .5rem;
+  transition: all .1s ease;
+}
+
+li:hover, li:focus, li:active {
+  transform: scale(1.1);
+  font-weight: bold;
+}
+
+li:hover a {
+ font-weight: bold;
 }
 
 li > a {
@@ -183,6 +206,7 @@ section {
 #new-content > * {
   border: 2px solid #059669;
   border-radius: 15px;
+  box-shadow: 3px 3px 5px #34d399;
   padding: .5rem;
   background-color: #FFE5B4;
   color: black;
@@ -193,7 +217,7 @@ section {
   flex-basis: 40%;
   flex-grow: 1.75;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   column-gap: 1rem;
   row-gap: 3rem;
   padding: 0 1rem;
@@ -205,6 +229,9 @@ section {
   flex-direction: column;
   gap: 2rem;
   flex: 1 1 0;
+  min-width: 150px;
+  max-width: 200px;
+  margin-right: 1rem;
 }
 
 .articles article {
@@ -268,6 +295,12 @@ article img {
 
 #right-column a {
   color: black;
+  transition: all .075s ease;
+}
+
+#right-column a:hover {
+  font-weight: bold;
+  transform: translateX(.25rem) scale(1.1);
 }
 
 #past-projects {
@@ -298,12 +331,12 @@ footer > div {
   }
 
   aside svg {
-    min-width: 30px;
-    min-height: 30px;
-    margin: .5rem 0;
+    max-width: 3rem;
+    max-height: 3rem;
+    margin: 1.25rem 0 0;
   }
 
-  li > a, #dashboard > svg {
+  li > a, #dashboard {
     display: inline;
   }
 
