@@ -1,3 +1,12 @@
+:root {
+  --diluno-red: #f26659;
+  --diluno-shadow: #fbc4a9;
+  --dull-polo-blue: #8CA9D3;
+  --dull-polo-shadow: #bccee6;
+  --white-lilac: #F0EFF4;
+  --white: white; 
+}
+
 * {
   box-sizing: border-box;
 }
@@ -15,9 +24,9 @@ header {
   display: flex;
   flex-direction: column;
   grid-column: 1/3;
-  background-color: #10b981;
+  background-color: var(--white);
   padding: .5rem 1rem 0;
-  box-shadow: 2.5px 2.5px 5px #34d399;
+  box-shadow: 2.5px 2.5px 5px #fbc4a9;
 }
 
 header svg {
@@ -49,7 +58,7 @@ header > div:first-child {
   display: none;
   border: none;
   border-radius: 15px;
-  outline: 2px solid rgb(255, 213, 134);
+  outline: 2px solid var(--diluno-red);
   width: 1px;
   transition: all .075s ease;
   grid-column: 1/2;
@@ -77,18 +86,17 @@ label[for='searchbar'] {
   min-width: 5%;
   display: flex;
   align-items: center;
-  outline: 1px solid rgba(255, 213, 134, .5);
+  outline: 1px solid var(--dull-polo-blue);
   border-radius: 15px;
   height: 2rem;
 }
 label[for='searchbar']:hover {
-  outline-color: #065f46;
-  background-color: #059669;
+  outline-color: var(--diluno-red);
 }
 
 label[for='searchbar']::after {
   content: "Search...";
-  color: rgba(255, 213, 134, .8);
+  color: grey;
   padding: .5rem;
 }
 
@@ -134,7 +142,7 @@ label[for='searchbar']::after {
 #my-projects {
   display: flex;
   justify-content: space-between;
-  color: #FFE5B4;
+  color: var(--diluno-red);
 }
 
 #my-projects h1 {
@@ -144,26 +152,25 @@ label[for='searchbar']::after {
 
 #my-projects > a {
   align-self: flex-end;
-  color: #FFE5B4;
+  color: black;
   margin-right: .5rem;
   margin-bottom: .5rem;
   padding: .25rem;
-  border: 2px solid #FFE5B4;
+  border: 2px solid var(--dull-polo-blue);
   border-radius: 15px;
   font-size: 14px;
 }
 
 #my-projects > a:hover {
-  border-color: #065f46;
-  color: #065f46;
+  background-color: var(--dull-polo-blue);
 }
 
 aside {
   display: flex;
   flex-direction: column;
   min-width: 11rem;
-  background-color: #065f46;
-  color: #ecfdf5;
+  background-color: var(--diluno-red);
+  color: #eddedd;
   padding: 0 1rem 0 .5rem;
 }
 
@@ -196,7 +203,7 @@ li:hover a {
 li > a {
   display: flex;
   gap: .25rem;
-  color: #ecfdf5;
+  color: #eddedd;
 }
 
 a > span {
@@ -209,7 +216,7 @@ aside svg {
 }
 
 main {
-  background-color: #6ee7b7; 
+  background-color: var(--white-lilac); 
 }
 
 section {
@@ -231,18 +238,17 @@ section {
 }
 
 #new-content > * {
-  border: 2px double #059669;
+  border: 2px solid var(--dull-polo-blue);
   border-radius: 15px;
-  box-shadow: 3px 3px 5px #34d399;
+  box-shadow: 3px 3px 5px var(--dull-polo-shadow);
   padding: .5rem;
-  background-color: #FFE5B4;
+  background-color: var(--white);
   color: black;
   font-size: .75rem;
 }
 
 #new-content > *:hover {
-  border-color: #065f46;
-  color: #065f46;
+  border-color: var(--diluno-red);;
 }
 
 .articles {
@@ -268,12 +274,12 @@ section {
 
 .articles article {
   display: grid;
-  background-color: #FFE5B4;
+  background-color: var(--dull-polo-blue);
   padding: 0 1rem;
   border-radius: 15px;
-  box-shadow: 5px 5px 5px #34d399;
+  box-shadow: 5px 5px 5px var(--dull-polo-shadow);
   max-height: auto;
-  border-left: 10px solid #065f46;
+  border-left: 10px solid var(--diluno-red);
 }
 
 
@@ -304,8 +310,8 @@ article img {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #FFD586;
-  box-shadow: 5px 5px 10px #047857;
+  background-color: var(--dull-polo-blue);
+  box-shadow: 5px 5px 10px var(--dull-polo-shadow);
   border-radius: 10px;
   padding: .5rem 1rem;
 }
@@ -324,7 +330,7 @@ article img {
   display: grid;
   grid-template-columns: 1fr repeat(auto-fit, minmax(3rem, 1fr));
   gap: .5rem;
-  background-color: white;
+  background-color: var(--white);
   border-radius: 10px;
   padding: .5rem;
 }
@@ -332,6 +338,7 @@ article img {
 #right-column h4 {
   width: 100%;
   margin: .5rem 0;
+  color: var(--dull-polo-blue);
 }
 
 #right-column a {
@@ -345,8 +352,8 @@ article img {
 }
 
 #past-projects {
-  background-color: #FFD586;
-  box-shadow: 5px 5px 10px #047857;
+  background-color: var(--dull-polo-blue);
+  box-shadow: 5px 5px 10px var(--dull-polo-shadow);
   border-radius: 10px;
   padding: .5rem;
 }
