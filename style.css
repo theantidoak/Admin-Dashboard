@@ -131,7 +131,7 @@ label[for='searchbar']::after {
 #profile-pic {
   width: 5rem;
   height: 5rem;
-  border: 2px solid #FFD586;
+  border: 2px solid var(--dull-polo-blue);
   border-radius: 50%;
   background-image: url(photos/Pirate1.jpg);
   background-position: center;
