@@ -19,3 +19,19 @@ darkLight.addEventListener('click', () => {
   }
   celestialBodies = !celestialBodies;
 });
+
+const bella = document.querySelector('#bell-a');
+
+bella.addEventListener('click', () => {
+  bella.style.transform='translateX(-2px)';
+  
+  const timeOut = setTimeout(() => {
+    bella.style.transform='translateX(2px)';
+  }, 100);
+
+  const timeOut2 = setTimeout(() => {
+    bella.style.transform='translateX(0)';
+  }, 200);
+
+  timeOut;
+})
