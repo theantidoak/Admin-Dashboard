@@ -1,18 +1,94 @@
 const searchLabel = document.querySelector("label[for='searchbar']");
 const searchInput = document.querySelector("#searchbar");
+const ul = document.querySelector('.suggestions');
 
-searchLabel.addEventListener('click', () => searchInput.style.display='block');
-searchInput.addEventListener('blur', () => searchInput.style.display='none');
+searchLabel.addEventListener('click', () => {
+  searchInput.style.display='block';
+  ul.style.display='inline-block';
+});
+searchInput.addEventListener('blur', () => {
+  // searchInput.style.display='none';
+  // ul.style.display='none';
+});
+
+searchInput.addEventListener('input', findMatch);
+
+
+const completedProjects = Array
+                  .from(document.querySelectorAll('.articles h4'))
+                  .map((project) => project.textContent);
+const upcomingProjects = Array
+                  .from(document.querySelectorAll('#upcoming-projects a'))
+                  .map((project => project.textContent))
+                  .map((project => project.replace('\n', '').trim()));
+const preTopProjects = Array
+                  .from(document.querySelectorAll('#past-projects a'))
+                  .map((project => project.textContent))
+                  .map((project => project.replace('\n', '').trim()));
+
+function findMatch() {
+  const regex = new RegExp(this.value, 'ig');
+  while(ul.firstElementChild) {
+    ul.removeChild(ul.lastChild);
+  }
+  const completedMatches = completedProjects.filter((project) => project.match(regex));
+  completedMatches.map((project) => {
+      const result = document.createElement('li');
+      const newResultContent = document.createTextNode(project);
+      const section = document.createElement('span');
+      const sectionContent = document.createTextNode('Completed');
+      section.appendChild(sectionContent);
+      result.appendChild(newResultContent);
+      result.appendChild(section);
+      ul.appendChild(result);
+  });
+
+  const upcomingMatches = upcomingProjects.filter((project) => project.match(regex));
+  upcomingMatches.map((project) => {
+    const result = document.createElement('li');
+    const newResultContent = document.createTextNode(project);
+    const section = document.createElement('span');
+    const sectionContent = document.createTextNode('Future');
+    section.appendChild(sectionContent);
+    result.appendChild(newResultContent);
+    result.appendChild(section);
+    ul.appendChild(result);
+  });
+
+  const preTopMatches = preTopProjects.filter((project) => project.match(regex));
+  preTopMatches.map((project) => {
+    const result = document.createElement('li');
+    const newResultContent = document.createTextNode(project);
+    const section = document.createElement('span');
+    const sectionContent = document.createTextNode('pre-TOP');
+    section.appendChild(sectionContent);
+    result.appendChild(newResultContent);
+    result.appendChild(section);
+    ul.appendChild(result);
+  });
+  
+  if (completedMatches == '' && upcomingMatches == '' && preTopMatches == '') {
+    const result = document.createElement('li');
+    const newResultContent = document.createTextNode('No results');
+    result.appendChild(newResultContent);
+    ul.appendChild(result);
+  }
+  if (this.value == '') {
+    while(ul.firstElementChild) {
+      ul.removeChild(ul.lastChild);
+    }
+  }
+}
 
 const darkLight = document.querySelector('#dark-light-mode');
 const sun = document.querySelector('#sun');
 const moon = document.querySelector('#moon');
 const root = document.querySelector(':root');
 const a = document.querySelectorAll('a');
-let celestialBodies = false;
+let nightMode = false;
 
 darkLight.addEventListener('click', () => {
-  if (!celestialBodies) {
+  if (!nightMode) {
     sun.style.transform='translateY(5px)';
     moon.style.transform='translateY(-5px)';
     root.style.setProperty('--diluno-red', '#9e180c');
@@ -33,8 +109,9 @@ darkLight.addEventListener('click', () => {
     root.style.setProperty('--white', 'white');
     a.forEach((ah) => ah.style.color='black');
   }
-  celestialBodies = !celestialBodies;
+  nightMode = !nightMode;
 });
+
 
 const bella = document.querySelector('#bell-a');
 
