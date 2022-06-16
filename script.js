@@ -45,7 +45,7 @@ function findMatch() {
     const secondHalf = project.slice(reMatches[0] + this.value.length);
     const highlightSpan = document.createElement('span');
     highlightSpan.classList.add('project-match');
-    const highlightSpanContent = document.createTextNode(this.value);
+    const highlightSpanContent = document.createTextNode(this.value.toLowerCase());
     highlightSpan.appendChild(highlightSpanContent);
 
     const firstPart = document.createTextNode(firstHalf);
@@ -75,7 +75,7 @@ function findMatch() {
     const secondHalf = project.slice(reMatches[0] + this.value.length);
     const highlightSpan = document.createElement('span');
     highlightSpan.classList.add('project-match');
-    const highlightSpanContent = document.createTextNode(this.value);
+    const highlightSpanContent = document.createTextNode(this.value.toLowerCase());
     highlightSpan.appendChild(highlightSpanContent);
 
     const firstPart = document.createTextNode(firstHalf);
@@ -104,7 +104,7 @@ function findMatch() {
     const secondHalf = project.slice(reMatches[0] + this.value.length);
     const highlightSpan = document.createElement('span');
     highlightSpan.classList.add('project-match');
-    const highlightSpanContent = document.createTextNode(this.value);
+    const highlightSpanContent = document.createTextNode(this.value.toLowerCase());
     highlightSpan.appendChild(highlightSpanContent);
 
     const firstPart = document.createTextNode(firstHalf);
