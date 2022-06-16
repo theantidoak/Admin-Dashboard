@@ -105,6 +105,7 @@ header > div:first-child {
 .suggestions a {
   color: var(--dull-polo-blue);
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .suggestions div:nth-of-type(2n-1) {
