@@ -1,6 +1,7 @@
 const searchLabel = document.querySelector("label[for='searchbar']");
 const searchInput = document.querySelector("#searchbar");
-const ul = document.querySelector('.suggestions');
+const suggestionDiv = document.querySelector('.suggestions');
+const ul = document.querySelector('.suggestions ul');
 
 searchLabel.addEventListener('click', () => {
   searchInput.style.display='block';
@@ -33,15 +34,33 @@ function findMatch() {
   }
   const completedMatches = completedProjects.filter((project) => project.match(regex));
   completedMatches.map((project) => {
-      const result = document.createElement('li');
-      const newResultContent = document.createTextNode(project);
-      const section = document.createElement('span');
-      const sectionContent = document.createTextNode('Completed');
-      section.appendChild(sectionContent);
-      result.appendChild(newResultContent);
-      result.appendChild(section);
-      ul.appendChild(result);
+
+    const reMatches = [...project.matchAll(regex)]
+                        .map((match) => match.index);
+    
+    const result = document.createElement('li');
+    const firstHalf = project.slice(0, reMatches[0]);
+    const secondHalf = project.slice(reMatches[0] + 1);
+
+    const highlightSpan = document.createElement('span');
+    highlightSpan.classList.add('project-match');
+    const highlightSpanContent = document.createTextNode(this.value);
+    highlightSpan.appendChild(highlightSpanContent);
+
+    const firstPart = document.createTextNode(firstHalf);
+    const secondPart = document.createTextNode(secondHalf);
+    result.appendChild(firstPart);
+    result.appendChild(highlightSpan);
+    result.appendChild(secondPart);
+
+    const section = document.createElement('span');
+    const sectionContent = document.createTextNode('Completed');
+
+    section.appendChild(sectionContent);
+    suggestionDiv.appendChild(section);
+    ul.appendChild(result);
   });
+  
 
   const upcomingMatches = upcomingProjects.filter((project) => project.match(regex));
   upcomingMatches.map((project) => {
@@ -78,6 +97,11 @@ function findMatch() {
       ul.removeChild(ul.lastChild);
     }
   }
+
+
+
+
+
 }
 
 const darkLight = document.querySelector('#dark-light-mode');

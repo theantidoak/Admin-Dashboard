@@ -79,9 +79,14 @@ header > div:first-child {
   content: none;
 }
 
-
-
 .suggestions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestions ul {
   width: 92%;
   margin: 0;
   padding: 0;
@@ -100,10 +105,6 @@ header > div:first-child {
   border-radius: 5px;
   color: var(--dull-polo-blue);
   font-weight: bold;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .suggestions li:nth-of-type(2n-1) {
@@ -115,11 +116,14 @@ header > div:first-child {
 .suggestions li:hover {
   color: var(--diluno-red);
 }
-.suggestions span {
+.suggestions span:not(.project-match) {
   align-self: flex-start;
   color: var(--dull-polo-blue);
   opacity: .7;
   font-weight:normal;
+}
+.project-match {
+  background-color: yellow;
 }
 
 
