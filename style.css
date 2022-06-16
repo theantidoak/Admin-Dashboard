@@ -80,47 +80,47 @@ header > div:first-child {
 }
 
 .suggestions {
+  width: 92%;
+  margin: 0;
+  padding: 0;
+  padding-left: 3%;
+  display: flex;
+  flex-direction: column;
+}
+
+.suggestions div {
+  width: max(12rem, 100%);
+  padding: 1.5rem .75rem;
+  height: 1rem;
+  margin: 0;
+  background-color: var(--white);
+  outline: 1px solid var(--dull-polo-blue);
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.suggestions ul {
-  width: 92%;
-  margin: 0;
-  padding: 0;
-  padding-left: 3%;
-}
-
-.suggestions li {
-  list-style: none;
-  justify-self: stretch;
-  width: max(12rem ,100%);
-  height: 1rem;
-  padding: 1.5rem .75rem;
-  background-color: var(--white);
-  margin: 0;
-  outline: 1px solid var(--dull-polo-blue);
-  border-radius: 5px;
+.suggestions a {
   color: var(--dull-polo-blue);
   font-weight: bold;
 }
 
-.suggestions li:nth-of-type(2n-1) {
+.suggestions div:nth-of-type(2n-1) {
   transform: perspective(100px) rotateX(-3deg) translateY(1px);
 }
-.suggestions li:nth-of-type(2n) {
+.suggestions div:nth-of-type(2n) {
   transform: perspective(100px) rotateX(3deg) translateY(1px);
 }
-.suggestions li:hover {
+.suggestions div:hover {
   color: var(--diluno-red);
 }
 .suggestions span:not(.project-match) {
   align-self: flex-start;
   color: var(--dull-polo-blue);
   opacity: .7;
-  font-weight:normal;
+  font-weight: normal;
 }
 .project-match {
   background-color: yellow;

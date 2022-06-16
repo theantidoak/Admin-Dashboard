@@ -1,15 +1,16 @@
 const searchLabel = document.querySelector("label[for='searchbar']");
 const searchInput = document.querySelector("#searchbar");
 const suggestionDiv = document.querySelector('.suggestions');
-const ul = document.querySelector('.suggestions ul');
+
+
 
 searchLabel.addEventListener('click', () => {
   searchInput.style.display='block';
-  ul.style.display='inline-block';
+  // suggestionDiv.style.display='inline-block';
 });
 searchInput.addEventListener('blur', () => {
   // searchInput.style.display='none';
-  // ul.style.display='none';
+  // suggestionDiv.style.display='none';
 });
 
 searchInput.addEventListener('input', findMatch);
@@ -29,8 +30,8 @@ const preTopProjects = Array
 
 function findMatch() {
   const regex = new RegExp(this.value, 'ig');
-  while(ul.firstElementChild) {
-    ul.removeChild(ul.lastChild);
+  while(suggestionDiv.firstElementChild) {
+    suggestionDiv.removeChild(suggestionDiv.lastChild);
   }
   const completedMatches = completedProjects.filter((project) => project.match(regex));
   completedMatches.map((project) => {
@@ -38,13 +39,16 @@ function findMatch() {
     const reMatches = [...project.matchAll(regex)]
                         .map((match) => match.index);
     
-    const result = document.createElement('li');
-    const firstHalf = project.slice(0, reMatches[0]);
-    const secondHalf = project.slice(reMatches[0] + 1);
+    const sug = document.createElement('div');
+    
+    const result = document.createElement('a');
+    
+    const firstHalf = project.slice(0, reMatches[0]).toUpperCase();
+    const secondHalf = project.slice(reMatches[0] + 1).toUpperCase();
 
     const highlightSpan = document.createElement('span');
     highlightSpan.classList.add('project-match');
-    const highlightSpanContent = document.createTextNode(this.value);
+    const highlightSpanContent = document.createTextNode(this.value.toUpperCase());
     highlightSpan.appendChild(highlightSpanContent);
 
     const firstPart = document.createTextNode(firstHalf);
@@ -57,51 +61,47 @@ function findMatch() {
     const sectionContent = document.createTextNode('Completed');
 
     section.appendChild(sectionContent);
-    suggestionDiv.appendChild(section);
-    ul.appendChild(result);
+    sug.appendChild(result);
+    sug.appendChild(section);
+    suggestionDiv.appendChild(sug);
   });
   
 
-  const upcomingMatches = upcomingProjects.filter((project) => project.match(regex));
-  upcomingMatches.map((project) => {
-    const result = document.createElement('li');
-    const newResultContent = document.createTextNode(project);
-    const section = document.createElement('span');
-    const sectionContent = document.createTextNode('Future');
-    section.appendChild(sectionContent);
-    result.appendChild(newResultContent);
-    result.appendChild(section);
-    ul.appendChild(result);
-  });
+  // const upcomingMatches = upcomingProjects.filter((project) => project.match(regex));
+  // upcomingMatches.map((project) => {
+  //   const result = document.createElement('li');
+  //   const newResultContent = document.createTextNode(project);
+  //   const section = document.createElement('span');
+  //   const sectionContent = document.createTextNode('Future');
+  //   section.appendChild(sectionContent);
+  //   result.appendChild(newResultContent);
+  //   result.appendChild(section);
+  //   suggestionDiv.appendChild(result);
+  // });
 
-  const preTopMatches = preTopProjects.filter((project) => project.match(regex));
-  preTopMatches.map((project) => {
-    const result = document.createElement('li');
-    const newResultContent = document.createTextNode(project);
-    const section = document.createElement('span');
-    const sectionContent = document.createTextNode('pre-TOP');
-    section.appendChild(sectionContent);
-    result.appendChild(newResultContent);
-    result.appendChild(section);
-    ul.appendChild(result);
-  });
+  // const preTopMatches = preTopProjects.filter((project) => project.match(regex));
+  // preTopMatches.map((project) => {
+  //   const result = document.createElement('li');
+  //   const newResultContent = document.createTextNode(project);
+  //   const section = document.createElement('span');
+  //   const sectionContent = document.createTextNode('pre-TOP');
+  //   section.appendChild(sectionContent);
+  //   result.appendChild(newResultContent);
+  //   result.appendChild(section);
+  //   suggestionDiv.appendChild(result);
+  // });
   
   if (completedMatches == '' && upcomingMatches == '' && preTopMatches == '') {
     const result = document.createElement('li');
     const newResultContent = document.createTextNode('No results');
     result.appendChild(newResultContent);
-    ul.appendChild(result);
+    suggestionDiv.appendChild(result);
   }
   if (this.value == '') {
-    while(ul.firstElementChild) {
-      ul.removeChild(ul.lastChild);
+    while(suggestionDiv.firstElementChild) {
+      suggestionDiv.removeChild(ul.lastChild);
     }
   }
-
-
-
-
-
 }
 
 const darkLight = document.querySelector('#dark-light-mode');
