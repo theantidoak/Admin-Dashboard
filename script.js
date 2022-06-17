@@ -43,7 +43,7 @@ function firstMatch(e) {
         e.preventDefault();
         scroll.scrollIntoView(true);
         suggestionDiv.style.display='none';
-        scroll.style.backgroundColor='grey';
+        scroll.style.backgroundColor='var(--diluno-red)';
       }
     });
   }
@@ -87,7 +87,7 @@ function findMatch() {
         if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.toLowerCase()) {
           scroll.scrollIntoView(true);
           suggestionDiv.style.display='none';
-          scroll.style.backgroundColor='grey';
+          scroll.style.backgroundColor='var(--diluno-red)';
         }
       });
     }
@@ -126,7 +126,7 @@ function findMatch() {
         if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
           scroll.scrollIntoView(true);
           suggestionDiv.style.display='none';
-          scroll.style.backgroundColor='grey';
+          scroll.style.backgroundColor='var(--diluno-red)';
         }
       });
     }
@@ -163,7 +163,7 @@ function findMatch() {
         if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
           scroll.scrollIntoView(true);
           suggestionDiv.style.display='none';
-          scroll.style.backgroundColor='grey';
+          scroll.style.backgroundColor='var(--diluno-red)';
         }
       });
     }
