@@ -76,7 +76,7 @@ function findMatch() {
     result.appendChild(highlightSpan);
     result.appendChild(secondPart);
     const section = document.createElement('span');
-    const sectionContent = document.createTextNode('Completed');
+    const sectionContent = document.createTextNode('My Projects');
     section.appendChild(sectionContent);
     sug.appendChild(result);
     sug.appendChild(section);
@@ -115,7 +115,7 @@ function findMatch() {
     result.appendChild(highlightSpan);
     result.appendChild(secondPart);
     const section = document.createElement('span');
-    const sectionContent = document.createTextNode('Future');
+    const sectionContent = document.createTextNode('Upcoming');
     section.appendChild(sectionContent);
     sug.appendChild(result);
     sug.appendChild(section);
@@ -191,7 +191,7 @@ const darkLight = document.querySelector('#dark-light-mode');
 const sun = document.querySelector('#sun');
 const moon = document.querySelector('#moon');
 const root = document.querySelector(':root');
-const a = document.querySelectorAll('a');
+
 let nightMode = false;
 
 darkLight.addEventListener('click', () => {
@@ -205,7 +205,7 @@ darkLight.addEventListener('click', () => {
     root.style.setProperty('--white-lilac', '#0f162f');
     root.style.setProperty('--white', '#1B2547');
     root.style.setProperty('--black', 'white');
-    a.forEach((ah) => ah.style.color='white');
+    root.style.setProperty('--dark-blue', '#bccee6');
   } else {
     sun.style.transform='translateY(-5px)';
     moon.style.transform='translateY(5px)';
@@ -216,7 +216,7 @@ darkLight.addEventListener('click', () => {
     root.style.setProperty('--white-lilac', '#F0EFF4');
     root.style.setProperty('--white', 'white');
     root.style.setProperty('--black', 'black');
-    a.forEach((ah) => ah.style.color='unset');
+    root.style.setProperty('--dark-blue', '#0f162f');
   }
   nightMode = !nightMode;
 });
