@@ -5,11 +5,22 @@
   --dull-polo-shadow: #bccee6;
   --white-lilac: #F0EFF4;
   --white: white; 
+  --black: black;
 }
 
 * {
   box-sizing: border-box;
 }
+
+/* clears the 'X' from Internet Explorer */
+input[type=search]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal {  display: none; width : 0; height: 0; }
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 a {
   text-decoration: none;
@@ -54,25 +65,22 @@ header > div:first-child {
   min-width: 7rem;
 }
 #searchbar {
+  appearance: none;
   padding: .5rem;
   display: none;
   border: none;
   border-radius: 5px;
   outline: 1px solid var(--dull-polo-blue);
+  width: 95%;
   background-color: var(--white);
-  width: 1px;
+  color: var(--black);
   transition: all .075s ease;
   grid-column: 1/2;
   grid-row: 1/2;
 }
-#searchbar:focus {
-  width: 95%;
-  margin-right: 1rem;
-}
+
 #searchbar:focus ~ label {
-  justify-self: end;
-  align-self: flex-start;
-  outline: none;
+  display: none;
 }
 
 #searchbar:focus ~ label::after {
@@ -80,7 +88,6 @@ header > div:first-child {
 }
 
 .suggestions {
-  
   width: 92%;
   margin: 0;
   padding: 0;
@@ -90,7 +97,6 @@ header > div:first-child {
 }
 
 .suggestions div {
-  
   width: max(12rem, 100%);
   padding: 1.5rem .75rem;
   height: 1rem;
@@ -105,8 +111,7 @@ header > div:first-child {
 }
 
 .suggestions a {
-  
-  color: black;
+  color: var(--black);
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -239,7 +244,7 @@ aside > ul {
   padding: .5rem;
 }
 
-li {
+aside li {
   margin-bottom: .5rem;
   transition: all .1s ease;
 }
@@ -259,7 +264,7 @@ aside li > a {
   color: #eddedd;
 }
 
-a > span {
+aside a > span {
   align-self: center;
 }
 
@@ -335,7 +340,9 @@ section {
   border-left: 10px solid var(--diluno-red);
 }
 
-
+.articles h4 {
+  width: fit-content;
+}
 article img {
   width: 100%;
   height: auto;
@@ -397,6 +404,7 @@ article img {
 #right-column a {
   color: black;
   transition: all .075s ease;
+  width: fit-content;
 }
 
 #right-column a:hover {
@@ -448,6 +456,10 @@ footer > div {
   aside {
     padding: .25rem;
     min-width: 4rem;
+  }
+
+  form, #searchbar {
+    max-width: 6.5rem;
   }
 
   #searchbar:focus + label {

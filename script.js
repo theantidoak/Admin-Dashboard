@@ -2,24 +2,6 @@ const searchLabel = document.querySelector("label[for='searchbar']");
 const searchInput = document.querySelector("#searchbar");
 const suggestionDiv = document.querySelector('.suggestions');
 
-searchLabel.addEventListener('click', () => {
-  searchInput.style.display='block';
-  suggestionDiv.style.display='flex';
-});
-searchInput.addEventListener('blur', (event) => {
-  searchInput.style.display='none';
-  if (!suggestionDiv.contains(event.target) && !searchInput.contains(event.target)) {
-    suggestionDiv.children.style.display='none';
-  }
-});
-searchInput.addEventListener('click', () => {
-  suggestionDiv.style.display='flex';
-});
-
-
-searchInput.addEventListener('input', findMatch);
-
-
 const completedProjects = document.querySelectorAll('.articles h4');
 const completedProjectsContent = Array.from(completedProjects)
                                 .map((project) => project.textContent);
@@ -32,6 +14,26 @@ const preTopProjectsContent = Array.from(preTopProjects)
                                 .map((project => project.textContent))
                                 .map((project => project.replace('\n', '').trim()));
 
+const projectList = [...completedProjects].concat([...upcomingProjects], [...preTopProjects]);
+
+document.addEventListener('click', (event) => {
+
+  if (!searchInput.contains(event.target) && !searchLabel.contains(event.target) &&
+    ![...suggestionDiv.children].some((child) => child.contains(event.target))) {
+    searchLabel.style.display='flex';
+    searchInput.style.display='none';
+    suggestionDiv.style.display='none';
+    projectList.forEach((project) => project.style.backgroundColor='transparent');
+  } else {
+    searchLabel.style.display='none';
+    searchInput.style.display='block';
+    if (![...suggestionDiv.children].some((child) => child.contains(event.target))) {
+      suggestionDiv.style.display='flex';
+    }
+  }
+});
+
+searchInput.addEventListener('input', findMatch);
 
 function findMatch() {
   const regex = new RegExp(this.value, 'ig');
@@ -70,6 +72,8 @@ function findMatch() {
       completedProjects.forEach((scroll) => {
         if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.toLowerCase()) {
           scroll.scrollIntoView(true);
+          suggestionDiv.style.display='none';
+          scroll.style.backgroundColor='grey';
         }
       });
     }
@@ -107,6 +111,8 @@ function findMatch() {
       upcomingProjects.forEach((scroll) => {
         if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
           scroll.scrollIntoView(true);
+          suggestionDiv.style.display='none';
+          scroll.style.backgroundColor='grey';
         }
       });
     }
@@ -142,6 +148,8 @@ function findMatch() {
       preTopProjects.forEach((scroll) => {
         if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
           scroll.scrollIntoView(true);
+          suggestionDiv.style.display='none';
+          scroll.style.backgroundColor='grey';
         }
       });
     }
@@ -160,11 +168,6 @@ function findMatch() {
       suggestionDiv.removeChild(suggestionDiv.lastChild);
     }
   }
-  document.addEventListener('click', (event) => {
-    if (!suggestionDiv.contains(event.target)) {
-      suggestionDiv.style.display='none';
-    }
-  });
 }
 
 
@@ -187,6 +190,7 @@ darkLight.addEventListener('click', () => {
     root.style.setProperty('--dull-polo-shadow', '#04040b');
     root.style.setProperty('--white-lilac', '#0f162f');
     root.style.setProperty('--white', '#1B2547');
+    root.style.setProperty('--black', 'white');
     a.forEach((ah) => ah.style.color='white');
   } else {
     sun.style.transform='translateY(-5px)';
@@ -197,7 +201,8 @@ darkLight.addEventListener('click', () => {
     root.style.setProperty('--dull-polo-shadow', '#bccee6');
     root.style.setProperty('--white-lilac', '#F0EFF4');
     root.style.setProperty('--white', 'white');
-    a.forEach((ah) => ah.style.color='black');
+    root.style.setProperty('--black', 'black');
+    a.forEach((ah) => ah.style.color='unset');
   }
   nightMode = !nightMode;
 });
