@@ -118,6 +118,7 @@ header > div:first-child {
   color: var(--black);
   font-weight: bold;
   text-transform: capitalize;
+  min-width: 6.5rem;
 }
 
 .suggestions div:nth-of-type(2n-1) {
