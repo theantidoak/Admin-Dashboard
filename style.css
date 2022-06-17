@@ -123,10 +123,10 @@ header > div:first-child {
 }
 
 .suggestions div:nth-of-type(2n-1) {
-  transform: perspective(100px) rotateX(-3deg) translateY(1px);
+  transform: perspective(100px) rotateX(-2deg) translateY(1px);
 }
 .suggestions div:nth-of-type(2n) {
-  transform: perspective(100px) rotateX(3deg) translateY(1px);
+  transform: perspective(100px) rotateX(2deg) translateY(1px);
 }
 .suggestions div:hover {
   color: var(--diluno-red);
