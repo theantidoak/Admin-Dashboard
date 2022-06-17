@@ -348,6 +348,10 @@ section {
   border-left: 10px solid var(--diluno-red);
 }
 
+.articles article:hover {
+  outline: 5px solid var(--dark-blue);
+}
+
 .articles h4 {
   width: fit-content;
   font-size: 1.25rem;
