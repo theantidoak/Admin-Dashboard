@@ -2,38 +2,44 @@ const searchLabel = document.querySelector("label[for='searchbar']");
 const searchInput = document.querySelector("#searchbar");
 const suggestionDiv = document.querySelector('.suggestions');
 
-
-
 searchLabel.addEventListener('click', () => {
   searchInput.style.display='block';
   suggestionDiv.style.display='flex';
 });
-searchInput.addEventListener('blur', () => {
+searchInput.addEventListener('blur', (event) => {
   searchInput.style.display='none';
-  suggestionDiv.style.display='none';
+  if (!suggestionDiv.contains(event.target) && !searchInput.contains(event.target)) {
+    suggestionDiv.children.style.display='none';
+  }
 });
+searchInput.addEventListener('click', () => {
+  suggestionDiv.style.display='flex';
+});
+
 
 searchInput.addEventListener('input', findMatch);
 
 
-const completedProjects = Array
-                  .from(document.querySelectorAll('.articles h4'))
-                  .map((project) => project.textContent);
-const upcomingProjects = Array
-                  .from(document.querySelectorAll('#upcoming-projects a'))
-                  .map((project => project.textContent))
-                  .map((project => project.replace('\n', '').trim()));
-const preTopProjects = Array
-                  .from(document.querySelectorAll('#past-projects a'))
-                  .map((project => project.textContent))
-                  .map((project => project.replace('\n', '').trim()));
+const completedProjects = document.querySelectorAll('.articles h4');
+const completedProjectsContent = Array.from(completedProjects)
+                                .map((project) => project.textContent);
+const upcomingProjects = document.querySelectorAll('#upcoming-projects a');
+const upcomingProjectsContent = Array.from(upcomingProjects)
+                                .map((project => project.textContent))
+                                .map((project => project.replace('\n', '').trim()));
+const preTopProjects = document.querySelectorAll('#past-projects a');
+const preTopProjectsContent = Array.from(preTopProjects)                  
+                                .map((project => project.textContent))
+                                .map((project => project.replace('\n', '').trim()));
+
 
 function findMatch() {
   const regex = new RegExp(this.value, 'ig');
   while(suggestionDiv.firstElementChild) {
     suggestionDiv.removeChild(suggestionDiv.lastChild);
   }
-  const completedMatches = completedProjects.filter((project) => project.match(regex));
+  
+  const completedMatches = completedProjectsContent.filter((project) => project.match(regex));
   completedMatches.map((project) => {
 
     const reMatches = [...project.matchAll(regex)]
@@ -53,22 +59,29 @@ function findMatch() {
     result.appendChild(firstPart);
     result.appendChild(highlightSpan);
     result.appendChild(secondPart);
-
     const section = document.createElement('span');
     const sectionContent = document.createTextNode('Completed');
-
     section.appendChild(sectionContent);
     sug.appendChild(result);
     sug.appendChild(section);
     suggestionDiv.appendChild(sug);
+    sug.addEventListener('click', scrollView);
+    function scrollView() { 
+      completedProjects.forEach((scroll) => {
+        if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.toLowerCase()) {
+          scroll.scrollIntoView(true);
+        }
+      });
+    }
   });
   
 
-  const upcomingMatches = upcomingProjects.filter((project) => project.match(regex));
+  const upcomingMatches = upcomingProjectsContent.filter((project) => project.match(regex));
   upcomingMatches.map((project) => {
+    
     const reMatches = [...project.matchAll(regex)]
-    .map((match) => match.index);
-
+                        .map((match) => match.index);
+    
     const sug = document.createElement('div');
     const result = document.createElement('a');
     const firstHalf = project.slice(0, reMatches[0]);
@@ -83,17 +96,23 @@ function findMatch() {
     result.appendChild(firstPart);
     result.appendChild(highlightSpan);
     result.appendChild(secondPart);
-
     const section = document.createElement('span');
     const sectionContent = document.createTextNode('Future');
-
     section.appendChild(sectionContent);
     sug.appendChild(result);
     sug.appendChild(section);
     suggestionDiv.appendChild(sug);
-    });
+    sug.addEventListener('click', scrollView);
+    function scrollView() { 
+      upcomingProjects.forEach((scroll) => {
+        if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
+          scroll.scrollIntoView(true);
+        }
+      });
+    }
+  });
 
-  const preTopMatches = preTopProjects.filter((project) => project.match(regex));
+  const preTopMatches = preTopProjectsContent.filter((project) => project.match(regex));
   preTopMatches.map((project) => {
     const reMatches = [...project.matchAll(regex)]
                         .map((match) => match.index);
@@ -112,14 +131,20 @@ function findMatch() {
     result.appendChild(firstPart);
     result.appendChild(highlightSpan);
     result.appendChild(secondPart);
-
     const section = document.createElement('span');
-    const sectionContent = document.createTextNode('pre-TOP');
-
+    const sectionContent = document.createTextNode('Pre-TOP');
     section.appendChild(sectionContent);
     sug.appendChild(result);
     sug.appendChild(section);
     suggestionDiv.appendChild(sug);
+    sug.addEventListener('click', scrollView);
+    function scrollView() { 
+      preTopProjects.forEach((scroll) => {
+        if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
+          scroll.scrollIntoView(true);
+        }
+      });
+    }
   });
   
   if (completedMatches == '' && upcomingMatches == '' && preTopMatches == '') {
@@ -135,7 +160,15 @@ function findMatch() {
       suggestionDiv.removeChild(suggestionDiv.lastChild);
     }
   }
+  document.addEventListener('click', (event) => {
+    if (!suggestionDiv.contains(event.target)) {
+      suggestionDiv.style.display='none';
+    }
+  });
 }
+
+
+
 
 const darkLight = document.querySelector('#dark-light-mode');
 const sun = document.querySelector('#sun');

@@ -106,7 +106,7 @@ header > div:first-child {
 
 .suggestions a {
   
-  color: var(--dull-polo-blue);
+  color: black;
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -127,7 +127,7 @@ header > div:first-child {
   font-weight: normal;
 }
 .project-match {
-  background-color: yellow;
+  background-color: var(--dull-polo-blue);
 }
 
 
