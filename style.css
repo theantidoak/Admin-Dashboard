@@ -74,7 +74,7 @@ header > div:first-child {
   outline: 1px solid var(--dull-polo-blue);
   width: 95%;
   background-color: var(--white);
-  color: var(--black);
+  color: var(--dark-blue);
   transition: all .075s ease;
   grid-column: 1/2;
   grid-row: 1/2;
@@ -116,7 +116,7 @@ header > div:first-child {
 }
 
 .suggestions a {
-  color: var(--black);
+  color: var(--dull-polo-blue);
   font-weight: bold;
   text-transform: capitalize;
   min-width: 6.5rem;
@@ -140,7 +140,7 @@ header > div:first-child {
   min-width: fit-content;
 }
 .project-match {
-  background-color: var(--dull-polo-blue);
+  background-color: var(--white-lilac);
 }
 
 
