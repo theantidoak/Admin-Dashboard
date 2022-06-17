@@ -34,6 +34,20 @@ document.addEventListener('click', (event) => {
 });
 
 searchInput.addEventListener('input', findMatch);
+searchInput.addEventListener('keydown', firstMatch);
+
+function firstMatch(e) {
+  if (e.key == 'Enter' && searchInput.value != '') {
+    projectList.forEach((scroll) => {
+      if (searchInput.nextElementSibling.firstElementChild.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
+        e.preventDefault();
+        scroll.scrollIntoView(true);
+        suggestionDiv.style.display='none';
+        scroll.style.backgroundColor='grey';
+      }
+    });
+  }
+}
 
 function findMatch() {
   const regex = new RegExp(this.value, 'ig');

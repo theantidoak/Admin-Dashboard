@@ -110,6 +110,10 @@ header > div:first-child {
   align-items: center;
 }
 
+.suggestions div:hover {
+  background-color: var(--white-lilac);
+}
+
 .suggestions a {
   color: var(--black);
   font-weight: bold;
