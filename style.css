@@ -56,8 +56,8 @@ header > div:first-child {
 
 .form {
   width: 100%;
-  position: relative;
-  flex: 1;
+  /* position: relative; */
+  /* flex: 1; */
   display: grid;
   justify-items: start;
   align-self: start;
@@ -98,8 +98,8 @@ header > div:first-child {
 
 .suggestions div {
   width: max(12rem, 100%);
-  padding: 1.5rem .75rem;
-  height: 1rem;
+  padding: .5rem .75rem;
+  height: 3rem;
   margin: 0;
   background-color: var(--white);
   outline: 1px solid var(--dull-polo-blue);
@@ -131,7 +131,7 @@ header > div:first-child {
   color: var(--diluno-red);
 }
 .suggestions span:not(.project-match) {
-  align-self: flex-start;
+  align-self: flex-end;
   color: var(--dull-polo-blue);
   opacity: .7;
   font-weight: normal;
