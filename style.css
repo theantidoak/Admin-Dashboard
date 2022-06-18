@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'saigon_sansregular';
+  src: url('saigonsans-regular-webfont.woff2') format('woff2'),
+       url('saigonsans-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 :root {
   --diluno-red: #f26659;
   --diluno-shadow: #fbc4a9;
@@ -12,7 +21,7 @@
 
 * {
   box-sizing: border-box;
-  /* cursor: auto; */
+  font-family: 'saigon_sansregular', sans-serif;
 }
 
 a {
