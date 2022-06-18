@@ -22,12 +22,69 @@ const projectListContent =
 document.addEventListener('click', hideSearchBar);
 searchInput.addEventListener('input', findMatch);
 searchInput.addEventListener('keydown', findFirstMatch);
+searchLabel.addEventListener('click', showAll);
+  
+
+/* ----------------------------------------*/
+/* Scroll searchbar result into view */
+
+function scrollView() { 
+  projectList.forEach((scroll) => { 
+    if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
+      scroll.scrollIntoView(true);
+      suggestionDiv.style.display='none';
+      scroll.style.backgroundColor='var(--diluno-red)';
+    }
+  });
+}
+
+/* ----------------------------------------*/
+/* Show whole list when user focuses the searchbar */
+
+  function showAll() {
+    if (searchInput.value == '') {
+      projectListContent.forEach((project) => {
+        const sug = document.createElement('div');
+        const result = document.createElement('a');
+        const resultContent = document.createTextNode(project);
+        const section = document.createElement('span');
+        result.appendChild(resultContent);
+        completedProjectsContent.forEach((completed) => {
+          if (completed == project) {
+            const sectionContent = document.createTextNode('My Projects');
+            section.appendChild(sectionContent);
+          }
+        });
+    
+        upcomingProjectsContent.forEach((upcoming) => {
+          if (upcoming == project) {
+            const sectionContent = document.createTextNode('Upcoming');
+            section.appendChild(sectionContent);
+          }
+        });
+    
+        preTopProjectsContent.forEach((preTop) => {
+          if (preTop == project) {
+            const sectionContent = document.createTextNode('Pre-TOP');
+            section.appendChild(sectionContent);
+          }
+        });
+
+        sug.appendChild(result);
+        sug.appendChild(section);
+        suggestionDiv.appendChild(sug);
+
+        sug.addEventListener('click', scrollView);
+      });
+    }
+  }
 
 
 /* ----------------------------------------*/
 /* Find the searchbar match */
 
 function findMatch() {
+  
   const regex = new RegExp(this.value, 'ig');
   while(suggestionDiv.firstElementChild) {
     suggestionDiv.removeChild(suggestionDiv.lastChild);
@@ -78,16 +135,6 @@ function findMatch() {
     sug.appendChild(section);
     suggestionDiv.appendChild(sug);
     sug.addEventListener('click', scrollView);
-    
-    function scrollView() { 
-      projectList.forEach((scroll) => {
-        if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
-          scroll.scrollIntoView(true);
-          suggestionDiv.style.display='none';
-          scroll.style.backgroundColor='var(--diluno-red)';
-        }
-      });
-    }
   });
   
   if (listMatches == '') {
@@ -130,7 +177,7 @@ function hideSearchBar(event) {
 /* Go to the match after pressing 'Enter' key */
 
 function findFirstMatch(e) {
-  if (e.key == 'Enter' && searchInput.value != '') {
+  if (e.key == 'Enter') {
     projectList.forEach((scroll) => {
       if (searchInput.nextElementSibling.firstElementChild.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
         e.preventDefault();
