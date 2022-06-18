@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'saigon_sansregular';
-  src: url('saigonsans-regular-webfont.woff2') format('woff2'),
-       url('saigonsans-regular-webfont.woff') format('woff');
+  src: url('/fonts/saigonsans-regular-webfont.woff2') format('woff2'),
+       url('fonts/saigonsans-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 
@@ -21,7 +21,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'saigon_sansregular', sans-serif;
+  font-family: 'saigon_sansregular', Arial, Helvetica, sans-serif;
 }
 
 a {
