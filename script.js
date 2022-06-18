@@ -28,7 +28,7 @@ document.addEventListener('click', (event) => {
     searchLabel.style.display='none';
     searchInput.style.display='block';
     if (![...suggestionDiv.children].some((child) => child.contains(event.target))) {
-      suggestionDiv.style.display='flex';
+      suggestionDiv.style.display='block';
     }
   }
 });
