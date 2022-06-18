@@ -90,6 +90,7 @@ form {
 
 #searchbar ~ label {
   display: flex;
+  align-items: center;
   padding-left: .5rem;
   width: 6.5rem;
   outline: 1px solid var(--dull-polo-blue);
@@ -179,6 +180,7 @@ header #profile-pic {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: not-allowed;
 }
 
 header #my-projects {
