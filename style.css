@@ -12,10 +12,12 @@
 
 * {
   box-sizing: border-box;
+  /* cursor: auto; */
 }
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* clears the 'X' from Internet Explorer */
@@ -231,6 +233,7 @@ aside li a {
   display: flex;
   gap: .25rem;
   color: #0f162f;
+  cursor: not-allowed;
 }
 
 aside a > svg {
@@ -272,6 +275,7 @@ section {
   background-color: var(--white);
   color: var(--dark-blue);
   font-size: .75rem;
+  cursor: not-allowed;
 }
 
 #new-content > *:hover {
