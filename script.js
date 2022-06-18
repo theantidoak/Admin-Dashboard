@@ -3,64 +3,40 @@ const searchInput = document.querySelector("#searchbar");
 const suggestionDiv = document.querySelector('.suggestions');
 
 const completedProjects = document.querySelectorAll('.articles h4');
-const completedProjectsContent = Array.from(completedProjects)
-                                .map((project) => project.textContent);
+const completedProjectsContent = 
+  Array.from(completedProjects).map((project) => project.textContent);
 const upcomingProjects = document.querySelectorAll('#upcoming-projects a');
-const upcomingProjectsContent = Array.from(upcomingProjects)
-                                .map((project => project.textContent))
-                                .map((project => project.replace('\n', '').trim()));
+const upcomingProjectsContent = 
+  Array.from(upcomingProjects).map((project => project.textContent))
+    .map((project => project.replace('\n', '').trim()));
 const preTopProjects = document.querySelectorAll('#past-projects a');
-const preTopProjectsContent = Array.from(preTopProjects)                  
-                                .map((project => project.textContent))
-                                .map((project => project.replace('\n', '').trim()));
+const preTopProjectsContent = 
+  Array.from(preTopProjects).map((project => project.textContent))
+    .map((project => project.replace('\n', '').trim()));
 
 const projectList = [...completedProjects].concat([...upcomingProjects], [...preTopProjects]);
+const projectListContent = 
+  completedProjectsContent.concat(upcomingProjectsContent, preTopProjectsContent);
 
-document.addEventListener('click', (event) => {
 
-  if (!searchInput.contains(event.target) && !searchLabel.contains(event.target) &&
-    ![...suggestionDiv.children].some((child) => child.contains(event.target))) {
-    searchLabel.style.display='flex';
-    searchInput.style.display='none';
-    suggestionDiv.style.display='none';
-    projectList.forEach((project) => project.style.backgroundColor='transparent');
-  } else {
-    searchLabel.style.display='none';
-    searchInput.style.display='block';
-    if (![...suggestionDiv.children].some((child) => child.contains(event.target))) {
-      suggestionDiv.style.display='block';
-    }
-  }
-});
-
+document.addEventListener('click', hideSearchBar);
 searchInput.addEventListener('input', findMatch);
-searchInput.addEventListener('keydown', firstMatch);
+searchInput.addEventListener('keydown', findFirstMatch);
 
-function firstMatch(e) {
-  if (e.key == 'Enter' && searchInput.value != '') {
-    projectList.forEach((scroll) => {
-      if (searchInput.nextElementSibling.firstElementChild.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
-        e.preventDefault();
-        scroll.scrollIntoView(true);
-        suggestionDiv.style.display='none';
-        scroll.style.backgroundColor='var(--diluno-red)';
-      }
-    });
-  }
-}
+
+/* ----------------------------------------*/
+/* Find the searchbar match */
 
 function findMatch() {
   const regex = new RegExp(this.value, 'ig');
   while(suggestionDiv.firstElementChild) {
     suggestionDiv.removeChild(suggestionDiv.lastChild);
   }
-  
-  const completedMatches = completedProjectsContent.filter((project) => project.match(regex));
-  completedMatches.map((project) => {
 
+  const listMatches = projectListContent.filter((project) => project.match(regex));
+  listMatches.map((project) => {
     const reMatches = [...project.matchAll(regex)]
-                        .map((match) => match.index);
-    
+                        .map((match) => match.index);    
     const sug = document.createElement('div');
     const result = document.createElement('a');
     const firstHalf = project.slice(0, reMatches[0]);
@@ -76,90 +52,35 @@ function findMatch() {
     result.appendChild(highlightSpan);
     result.appendChild(secondPart);
     const section = document.createElement('span');
-    const sectionContent = document.createTextNode('My Projects');
-    section.appendChild(sectionContent);
+    
+    completedProjectsContent.forEach((completed) => {
+      if (completed == project) {
+        const sectionContent = document.createTextNode('My Projects');
+        section.appendChild(sectionContent);
+      }
+    });
+
+    upcomingProjectsContent.forEach((upcoming) => {
+      if (upcoming == project) {
+        const sectionContent = document.createTextNode('Upcoming');
+        section.appendChild(sectionContent);
+      }
+    });
+
+    preTopProjectsContent.forEach((preTop) => {
+      if (preTop == project) {
+        const sectionContent = document.createTextNode('Pre-TOP');
+        section.appendChild(sectionContent);
+      }
+    });
+
     sug.appendChild(result);
     sug.appendChild(section);
     suggestionDiv.appendChild(sug);
     sug.addEventListener('click', scrollView);
-    function scrollView() { 
-      completedProjects.forEach((scroll) => {
-        if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.toLowerCase()) {
-          scroll.scrollIntoView(true);
-          suggestionDiv.style.display='none';
-          scroll.style.backgroundColor='var(--diluno-red)';
-        }
-      });
-    }
-  });
-  
-
-  const upcomingMatches = upcomingProjectsContent.filter((project) => project.match(regex));
-  upcomingMatches.map((project) => {
     
-    const reMatches = [...project.matchAll(regex)]
-                        .map((match) => match.index);
-    
-    const sug = document.createElement('div');
-    const result = document.createElement('a');
-    const firstHalf = project.slice(0, reMatches[0]);
-    const secondHalf = project.slice(reMatches[0] + this.value.length);
-    const highlightSpan = document.createElement('span');
-    highlightSpan.classList.add('project-match');
-    const highlightSpanContent = document.createTextNode(this.value.toLowerCase());
-    highlightSpan.appendChild(highlightSpanContent);
-
-    const firstPart = document.createTextNode(firstHalf);
-    const secondPart = document.createTextNode(secondHalf);
-    result.appendChild(firstPart);
-    result.appendChild(highlightSpan);
-    result.appendChild(secondPart);
-    const section = document.createElement('span');
-    const sectionContent = document.createTextNode('Upcoming');
-    section.appendChild(sectionContent);
-    sug.appendChild(result);
-    sug.appendChild(section);
-    suggestionDiv.appendChild(sug);
-    sug.addEventListener('click', scrollView);
     function scrollView() { 
-      upcomingProjects.forEach((scroll) => {
-        if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
-          scroll.scrollIntoView(true);
-          suggestionDiv.style.display='none';
-          scroll.style.backgroundColor='var(--diluno-red)';
-        }
-      });
-    }
-  });
-
-  const preTopMatches = preTopProjectsContent.filter((project) => project.match(regex));
-  preTopMatches.map((project) => {
-    const reMatches = [...project.matchAll(regex)]
-                        .map((match) => match.index);
-    
-    const sug = document.createElement('div');
-    const result = document.createElement('a');
-    const firstHalf = project.slice(0, reMatches[0]);
-    const secondHalf = project.slice(reMatches[0] + this.value.length);
-    const highlightSpan = document.createElement('span');
-    highlightSpan.classList.add('project-match');
-    const highlightSpanContent = document.createTextNode(this.value.toLowerCase());
-    highlightSpan.appendChild(highlightSpanContent);
-
-    const firstPart = document.createTextNode(firstHalf);
-    const secondPart = document.createTextNode(secondHalf);
-    result.appendChild(firstPart);
-    result.appendChild(highlightSpan);
-    result.appendChild(secondPart);
-    const section = document.createElement('span');
-    const sectionContent = document.createTextNode('Pre-TOP');
-    section.appendChild(sectionContent);
-    sug.appendChild(result);
-    sug.appendChild(section);
-    suggestionDiv.appendChild(sug);
-    sug.addEventListener('click', scrollView);
-    function scrollView() { 
-      preTopProjects.forEach((scroll) => {
+      projectList.forEach((scroll) => {
         if (this.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
           scroll.scrollIntoView(true);
           suggestionDiv.style.display='none';
@@ -169,7 +90,7 @@ function findMatch() {
     }
   });
   
-  if (completedMatches == '' && upcomingMatches == '' && preTopMatches == '') {
+  if (listMatches == '') {
     const sug = document.createElement('div');
     const result = document.createElement('a');
     const newResultContent = document.createTextNode('No results');
@@ -185,13 +106,50 @@ function findMatch() {
 }
 
 
+/* ----------------------------------------*/
+/* Hide the Searchbar */
 
+function hideSearchBar(event) {
+  if (!searchInput.contains(event.target) && !searchLabel.contains(event.target) &&
+    ![...suggestionDiv.children].some((child) => child.contains(event.target))) {
+    searchLabel.style.display='flex';
+    searchInput.style.display='none';
+    suggestionDiv.style.display='none';
+    projectList.forEach((project) => project.style.backgroundColor='transparent');
+  } else {
+    searchLabel.style.display='none';
+    searchInput.style.display='block';
+    if (![...suggestionDiv.children].some((child) => child.contains(event.target))) {
+      suggestionDiv.style.display='block';
+    }
+  }
+};
+
+
+/* ----------------------------------------*/
+/* Go to the match after pressing 'Enter' key */
+
+function findFirstMatch(e) {
+  if (e.key == 'Enter' && searchInput.value != '') {
+    projectList.forEach((scroll) => {
+      if (searchInput.nextElementSibling.firstElementChild.firstElementChild.textContent.toLowerCase() == scroll.textContent.trim().toLowerCase()) {
+        e.preventDefault();
+        scroll.scrollIntoView(true);
+        suggestionDiv.style.display='none';
+        scroll.style.backgroundColor='var(--diluno-red)';
+      }
+    });
+  }
+}
+
+
+/* ----------------------------------------*/
+/* Toggle Light and Dark color scheme */
 
 const darkLight = document.querySelector('#dark-light-mode');
 const sun = document.querySelector('#sun');
 const moon = document.querySelector('#moon');
 const root = document.querySelector(':root');
-
 let nightMode = false;
 
 darkLight.addEventListener('click', () => {
@@ -222,18 +180,14 @@ darkLight.addEventListener('click', () => {
 });
 
 
+/* ----------------------------------------*/
+/* Toggle Light and Dark color icons */
+
 const bella = document.querySelector('#bell-a');
+bella.addEventListener('click', toggleIcons);
 
-bella.addEventListener('click', () => {
-  bella.style.transform='translateX(-2px)';
-  
-  const timeOut = setTimeout(() => {
-    bella.style.transform='translateX(2px)';
-  }, 100);
-
-  const timeOut2 = setTimeout(() => {
-    bella.style.transform='translateX(0)';
-  }, 200);
-
-  timeOut;
-});
+function toggleIcons() {
+  bella.style.transform='translateX(-2px)'; 
+  setTimeout(() => bella.style.transform='translateX(2px)', 100);
+  setTimeout(() => bella.style.transform='translateX(0)', 200);
+};
