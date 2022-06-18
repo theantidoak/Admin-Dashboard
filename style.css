@@ -203,7 +203,7 @@ aside {
 #dashboard {
   display: flex;
   align-items: center;
-  gap: .75rem;
+  gap: .25rem;
   color: #0f162f;
 }
 #dashboard svg {
@@ -419,12 +419,9 @@ footer {
   #dashboard svg {
     width: 3rem;
     height: 3rem;
-  }
-
-  aside svg {
     max-width: 3rem;
     max-height: 3rem;
-    margin: .5rem 0 0;
+    margin-top: 1rem;
   }
   
   aside li a > span, #dashboard > h2 {
