@@ -325,10 +325,6 @@ section {
   border-left: 10px solid var(--diluno-red);
 }
 
-.articles article:hover {
-  outline: 5px solid var(--dark-blue);
-}
-
 .articles article h4 {
   width: fit-content;
   font-size: 1.25rem;
@@ -354,8 +350,14 @@ section {
   transition: var(--fast-transition);
 }
 
+.articles article:hover svg {
+  outline: 2px solid var(--dark-blue);
+  border-radius: 10px;
+  padding: .1rem;
+}
+
 .view-content svg:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .view-content svg:active {
