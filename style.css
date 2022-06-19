@@ -4,7 +4,6 @@
        url('fonts/saigonsans-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-
 }
 
 :root {
@@ -49,6 +48,9 @@ header svg {
   width: 1.5rem;
   height: 1.5rem;
 }
+
+/* ----------------------------------------*/
+/* Header: searchbar, icons, My project, Cheatsheets */
 
 header {
   padding: .5rem 1rem 0;
@@ -206,6 +208,9 @@ header #my-projects {
 }
 
 
+/* ----------------------------------------*/
+/* Left-side navigation list: Title with logo, list of non-functional links */
+
 aside {
   min-width: 11rem;
   background-color: var(--diluno-red);
@@ -255,6 +260,11 @@ aside a > svg {
 aside a > span {
   align-self: center;
 }
+
+
+/* ----------------------------------------*/
+/* Main section: non-functional #new-content links, projects, 
+  upcoming projects, pre-TOP */
 
 main {
   background-color: var(--white-lilac); 
@@ -410,6 +420,9 @@ section {
   padding: .5rem;
 }
 
+
+/* ----------------------------------------*/
+/* Footer */
 footer {
   height: 2rem;
   width: 100%;
@@ -417,6 +430,11 @@ footer {
   text-align: center;
 }
 
+
+/* ----------------------------------------*/
+/* Media query for small device, 
+changing left-side navigation by removing words and leaving icons. 
+Also: max-width for searchbar form */
 
 @media screen and (max-width: 480px) {
   aside {

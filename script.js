@@ -191,7 +191,7 @@ function findFirstMatch(e) {
 
 
 /* ----------------------------------------*/
-/* Toggle Light and Dark color scheme */
+/* Toggle Light and Dark color scheme AND toggle light and dark icons */
 
 const darkLight = document.querySelector('#dark-light-mode');
 const sun = document.querySelector('#sun');
@@ -228,7 +228,7 @@ darkLight.addEventListener('click', () => {
 
 
 /* ----------------------------------------*/
-/* Toggle Light and Dark color icons */
+/* Shake the bell icon */
 
 const bella = document.querySelector('#bell-a');
 bella.addEventListener('click', toggleIcons);
