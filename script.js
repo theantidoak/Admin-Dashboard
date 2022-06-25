@@ -42,7 +42,11 @@ function scrollView() {
 /* Show whole list when user focuses the searchbar */
 
   function showAll() {
+
     if (searchInput.value == '') {
+      while(suggestionDiv.firstElementChild) {
+        suggestionDiv.removeChild(suggestionDiv.lastChild);
+      }
       projectListContent.forEach((project) => {
         const sug = document.createElement('div');
         const result = document.createElement('a');
