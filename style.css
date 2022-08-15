@@ -356,6 +356,10 @@ section {
   padding: .1rem;
 }
 
+.articles article:hover img {
+  transform: scale(1.1);
+}
+
 .view-content svg:hover {
   transform: scale(1.2);
 }

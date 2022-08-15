@@ -3,6 +3,7 @@ const searchInput = document.querySelector("#searchbar");
 const suggestionDiv = document.querySelector('.suggestions');
 
 const completedProjects = document.querySelectorAll('.articles h4');
+const projectArticles = document.querySelectorAll('.articles article');
 const completedProjectsContent = 
   Array.from(completedProjects).map((project) => project.textContent);
 const upcomingProjects = document.querySelectorAll('#upcoming-projects a');
@@ -18,12 +19,18 @@ const projectList = [...completedProjects].concat([...upcomingProjects], [...pre
 const projectListContent = 
   completedProjectsContent.concat(upcomingProjectsContent, preTopProjectsContent);
 
-
 document.addEventListener('click', hideSearchBar);
 searchInput.addEventListener('input', findMatch);
 searchInput.addEventListener('keydown', findFirstMatch);
 searchLabel.addEventListener('click', showAll);
+projectArticles.forEach(article => article.addEventListener('click', goToProject));
   
+function goToProject(e) {
+  if (e.target.nodeName == 'svg' || e.target.nodeName == 'path') return;
+  e.preventDefault();
+  const link = this.lastElementChild.firstElementChild;
+  window.location.href = link.href;
+}
 
 /* ----------------------------------------*/
 /* Scroll searchbar result into view */
