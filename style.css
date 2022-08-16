@@ -340,7 +340,7 @@ section {
 }
 
 .view-content {
-  justify-self: end;
+  justify-self: center;
   align-self: end;
   padding-bottom: .25rem;
 }
