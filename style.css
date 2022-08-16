@@ -234,7 +234,7 @@ aside {
 
 aside > ul {
   list-style: none;
-  padding: 1rem;
+  padding: .5rem;
 }
 
 aside li {
@@ -447,7 +447,7 @@ Also: max-width for searchbar form */
   aside {
     text-align: center;
     padding: 0;
-    min-width: 4rem;
+    min-width: 3rem;
   }
 
   #dashboard, aside li > a {
