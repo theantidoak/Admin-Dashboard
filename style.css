@@ -71,7 +71,7 @@ header > div:first-child {
 form {
   flex-basis: 100%;
   margin-top: .75rem;
-  min-width: 7rem;
+  min-width: 6rem;
 }
 
 #searchbar {
@@ -81,7 +81,7 @@ form {
   outline: 1px solid var(--dull-polo-blue);
   background-color: var(--white);
   color: var(--dark-blue);
-  width: clamp(8rem, 91%, 27rem);
+  width: clamp(7rem, 91%, 27rem);
   padding: .5rem;
 }
 #searchbar:focus ~ label {
