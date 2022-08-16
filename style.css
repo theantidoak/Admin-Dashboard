@@ -41,6 +41,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 body {
   display: flex;
+  width: fit-content;
   margin: 0;
 }
 
